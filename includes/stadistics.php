@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <?php include './includes/head.php'; ?>
-    <body>
-        <?php include './includes/header.php'; ?>
-        <h1>Estadistias</h1>
-    </body>
-    <?php include './includes/footer.php'; ?>
-</html>
+<?php 
+    include 'head.php';
+    include 'header.php';
+    echo '<h1>Estadisticas</h1>';
+    include './footer.php';
+?>

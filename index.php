@@ -9,29 +9,55 @@
         <?php include './includes/header.php'; ?>
         <div class="places">
             <h1>Lugares a visitar</h1>
-            <table class="table-places">
+            <table class="table">
                 <?php 
                     $result = getAllLocations();
-                    echo '<tr>'
-                        . '<th> Nombre </th> '
-                        . '<th> Foto </th>'
-                        . '<th> Video </th> '
-                        . '<th> Descripcion </th> '
-                        . '<th> Promedio Puntaje </th> '
-                        . '<th> Comentarios </th> '
-                        . '</tr>';
+                    echo '<tr> <thead class="thead-dark">'
+                        . '<th scope="col"> Nombre </th> '
+                        . '<th scope="col"> Foto </th>'
+                        . '<th scope="col"> Video </th> '
+                        . '<th scope="col"> Descripcion </th> '
+                        . '<th scope="col"> Promedio Puntaje </th> '
+                        . '<th scope="col"> Comentarios </th> '
+                        . '</tr> </thead>';
                     foreach ($result as $cat) {
                         echo "<tr>"
                             . "<td>$cat[1]</td> "
-                            . "<td> <img src=./asseets/images/$cat[3]  width='70' height='35'> </td>"
-                            . "<td> <a href='$cat[4]'>Link</a> </td> "
-                            . "<td>$cat[5]</td>"
-                            . "<td>25</td>"
-                            . "<td><button> Ver </button> </td>"
-                            . "</tr>";
+                            . "<td> <img src=./asseets/images/$cat[3]  width='80' height='40'> </td>";
+                            if($cat[4]!=null) {
+                                echo "<td> <a href='$cat[4]'>Link</a> </td> ";
+                            } else {
+                                 echo "<td> <p>Link</p> </td> ";
+                            };
+                        echo "<td>$cat[5]</td>"
+                            . "<td>3</td>";
+                        echo '<td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"> Ver </button> </td></tr>';
                     }
                 ?>
             </table>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+  
         </div>
         <div class="login">
             <h1>Log In</h1>

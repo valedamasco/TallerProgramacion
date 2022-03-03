@@ -1,0 +1,30 @@
+.nav-bar{
+    clear:both; 
+    width: 100%;
+    height: 30px;
+    box-shadow: 0px 1px 1px #ccc;
+}
+
+.nav-bar ul {
+    list-style: none;
+}
+
+.nav-bar ul li{
+    float: left;
+    line-height: 30px;
+}
+
+.nav-bar ul li a{
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    color : threedshadow;
+}
+
+.nav-bar ul li:hover{
+   background: linear-gradient(to bottom, #f2f2f2 0px, #dad9d4 100%);
+}
+
+.bad-request {
+    color:red;
+}
