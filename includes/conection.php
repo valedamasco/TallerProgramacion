@@ -101,3 +101,25 @@ function getAllLocations(){
     }  
     mysqli_close($db);
 }
+
+function postNewLocation($name, $department, $photo, $linkvideo, $description){
+    
+    $servidor = '127.0.0.1';
+    $usuario = 'root';
+    $password = 'root';
+    $baseDeDatos = 'obligatorio';
+    $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
+    if(!db){
+        echo '<label>Error al conectarse a la base</label>';
+        var_dump($db);
+    }else{
+        $consultaSql = "INSERT INTO lugares VALUES ('','$name',$department ,'$photo','$linkvideo', '$description' )";
+        $result = mysqli_query($db, $consultaSql);
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+}
