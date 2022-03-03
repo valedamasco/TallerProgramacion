@@ -1,4 +1,6 @@
 <?php
+
+
 function conectionDB(){
     $servidor = '127.0.0.1';
     $usuario = 'root';
@@ -38,7 +40,9 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                     $_SESSION['email'] = $emailLogin;
                     $fetchResult = mysqli_fetch_assoc($result);
                     $_SESSION['alias'] = $fetchResult['alias'];
+                    $_SESSION['isAdmin'] = $fetchResult['es_admin'];
                 } 
+                var_dump($_SESSION);
                 return $logIn;
                 break;
             case 'check':
@@ -59,6 +63,7 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                     session_start();
                     $_SESSION['email'] = $emailLogin;
                     $_SESSION['alias'] = $aliasLogin;
+                    $_SESSION['isAdmin'] = $isAdmin;
                 } 
                 return $registerUser;
                 break;
@@ -93,5 +98,6 @@ function getAllLocations(){
             return $data;
         } 
         return [];
-    }    
+    }  
+    mysqli_close($db);
 }

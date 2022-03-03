@@ -23,9 +23,13 @@
                     foreach ($result as $cat) {
                         echo "<tr>"
                             . "<td>$cat[1]</td> "
-                            . "<td> <img src=./asseets/images/$cat[3]  width='70' height='35'> </td>"
-                            . "<td> <a href='$cat[4]'>Link</a> </td> "
-                            . "<td>$cat[5]</td>"
+                            . "<td> <img src=./asseets/images/$cat[3]  width='70' height='35'> </td>";
+                            if($cat[4]!=null) {
+                                echo "<td> <a href='$cat[4]'>Link</a> </td> ";
+                            } else {
+                                 echo "<td> <p>Link</p> </td> ";
+                            };
+                        echo "<td>$cat[5]</td>"
                             . "<td>25</td>"
                             . "<td><button> Ver </button> </td>"
                             . "</tr>";

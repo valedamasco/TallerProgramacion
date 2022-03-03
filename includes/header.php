@@ -1,9 +1,4 @@
 <header class="header">
-    <div class="title">
-        <a href="/Obligatorio-167467/index.php">                   
-            Blog turismo
-        </a>              
-    </div> 
     <nav class="nav-bar">
         <ul>
             <li>
