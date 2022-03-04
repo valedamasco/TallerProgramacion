@@ -28,3 +28,9 @@
 .bad-request {
     color:red;
 }
+
+.footer {
+   position: absolute;
+   left: 0;
+   bottom: 0; 
+}

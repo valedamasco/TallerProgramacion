@@ -7,19 +7,47 @@
     ?>
     <body>
         <?php include './includes/header.php'; ?>
-        <div class="places">
+        
+        <div class="container">
+            <h1>Log In</h1>
+            <form method="POST" class="form-login">
+                <table class="table" style="width: 30%">
+                    <tr> <td>Email</td> <td> <input type="email" name="email"> </td> </tr>
+                    <tr> <td>Clave</td> <td> <input type="password" name="password"> </td> </tr>
+                    <tr> <td><input type="submit"></td> <td align="right"> <a href="./includes/register.php">Registrarse</a> </td></tr>
+                    <?php 
+                        if (array_key_exists("email", $_POST) && array_key_exists("password", $_POST)){
+                            if(strlen($_POST['email']) > 0 && strlen($_POST['password']) > 0) {
+                                $afterLogIn = loginOperations($_POST['email'],'login', $_POST['password']);
+                                if($afterLogIn==0){
+                                    echo '<label>Usuario o clave incorrecta</label>';
+                                } else {
+                                    echo '<label>Login exitoso!</label>';
+                                }
+                            } else { 
+                                echo '<label>Ingrese usuario y clave</label>';
+                            }
+                        }
+                    ?>
+                </table>
+            </form>
+        </div>
+        
+        <div class="container">
             <h1>Lugares a visitar</h1>
             <table class="table">
+                <thead class="thead-dark"> 
+                   <tr>
+                    <th scope="col"> Nombre </th> 
+                    <th scope="col"> Foto </th>
+                    <th scope="col"> Video </th> 
+                    <th scope="col"> Descripcion </th> 
+                    <th scope="col"> Promedio Puntaje </th> 
+                    <th scope="col"> Comentarios </th> 
+                   </tr> 
+                </thead>
                 <?php 
                     $result = getAllLocations();
-                    echo '<thead class="thead-dark"> <tr>'
-                        . '<th scope="col"> Nombre </th> '
-                        . '<th scope="col"> Foto </th>'
-                        . '<th scope="col"> Video </th> '
-                        . '<th scope="col"> Descripcion </th> '
-                        . '<th scope="col"> Promedio Puntaje </th> '
-                        . '<th scope="col"> Comentarios </th> '
-                        . '</tr> </thead>';
                     foreach ($result as $cat) {
                         echo "<tbody> <tr>"
                             . "<td>$cat[1]</td> "
@@ -72,31 +100,6 @@
 
           </div>
         </div>
-  
-        </div>
-        <div class="login">
-            <h1>Log In</h1>
-            <form method="POST" class="form-login">
-                <table>
-                    <tr> <td>Email</td> <td> <input type="email" name="email"> </td> </tr>
-                    <tr> <td>Clave</td> <td> <input type="password" name="password"> </td> </tr>
-                    <tr> <td><input type="submit"></td> <td align="right"> <a href="./includes/register.php">Registrarse</a> </td></tr>
-                    <?php 
-                        if (array_key_exists("email", $_POST) && array_key_exists("password", $_POST)){
-                            if(strlen($_POST['email']) > 0 && strlen($_POST['password']) > 0) {
-                                $afterLogIn = loginOperations($_POST['email'],'login', $_POST['password']);
-                                if($afterLogIn==0){
-                                    echo '<label>Usuario o clave incorrecta</label>';
-                                } else {
-                                    echo '<label>Login exitoso!</label>';
-                                }
-                            } else { 
-                                echo '<label>Ingrese usuario y clave</label>';
-                            }
-                        }
-                    ?>
-                </table>
-            </form>
         </div>
     </body>
     <?php include './includes/footer.php'; ?>

@@ -150,3 +150,29 @@ function getAllCommentsByPlace($placeId){
     }  
     mysqli_close($db);
 }
+
+function getAllUsers(){
+    $servidor = '127.0.0.1';
+    $usuario = 'root';
+    $password = 'root';
+    $baseDeDatos = 'obligatorio';
+    $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
+
+    if(!db){
+        echo '<label>Error al conectarse a la base</label>';
+        var_dump($db);
+    }else{
+        $consultaSql = "SELECT * FROM `usuarios`";
+        $result = mysqli_query($db, $consultaSql);
+        $rows = mysqli_num_rows($result);
+        if($rows>0){
+            $data = array();
+            while($row = mysqli_fetch_row($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } 
+        return [];
+    }  
+    mysqli_close($db);
+}
