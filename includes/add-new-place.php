@@ -2,10 +2,11 @@
     include_once './head.php';
     include 'header.php';
     include './conection.php';
-    echo '<h1>Agregar nuevo lugar</h1>';
 ?>
+<div class="container">
+<h1>Agregar nuevo lugar</h1>
 <form method="POST" class="form-ass-new-place">
-    <table>
+    <table class="table">
         <tr> <td>Nombre</td> <td> <input type="text" name="name"> </td> </tr>
         <tr> <td>Departamento</td> <td> 
             <select name="department">
@@ -49,6 +50,7 @@
         ?>
     </table>
 </form>
+</div>
 <?php 
     include './footer.php';
 ?>
