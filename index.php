@@ -12,7 +12,7 @@
             <table class="table">
                 <?php 
                     $result = getAllLocations();
-                    echo '<tr> <thead class="thead-dark">'
+                    echo '<thead class="thead-dark"> <tr>'
                         . '<th scope="col"> Nombre </th> '
                         . '<th scope="col"> Foto </th>'
                         . '<th scope="col"> Video </th> '
@@ -21,7 +21,7 @@
                         . '<th scope="col"> Comentarios </th> '
                         . '</tr> </thead>';
                     foreach ($result as $cat) {
-                        echo "<tr>"
+                        echo "<tbody> <tr>"
                             . "<td>$cat[1]</td> "
                             . "<td> <img src=./asseets/images/$cat[3]  width='80' height='40'> </td>";
                             if($cat[4]!=null) {
@@ -31,7 +31,8 @@
                             };
                         echo "<td>$cat[5]</td>"
                             . "<td>3</td>";
-                        echo '<td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"> Ver </button> </td></tr>';
+                        echo '<td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"'
+                        . "id='$cat[0]'> Ver </button>  </td></tr> </tbody>";
                     }
                 ?>
             </table>
@@ -40,15 +41,29 @@
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
-
+              <h1>ID boton:></h1>
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Comentarios</h4>
               </div>
               <div class="modal-body">
-                <p>Some text in the modal.</p>
+                  <table class="table">
+                      <thead class="thead-dark"> <tr>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Alias</th>
+                          <th scope="col">Texto</th>
+                          <th scope="col">Puntaje</th>
+                      </tr> </thead> 
+                      <?php 
+                        $allComments = getAllCommentsByPlace(1);
+                        echo '<tbody>';
+                        foreach ($allComments as $comment) {
+                            echo "<tr> <td>$comment[4]</td> <td>$comment[8]</td> <td>$comment[3]</td> <td>$comment[5]</td> </tr>";
+                        }
+                      ?>
+                  </table>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
