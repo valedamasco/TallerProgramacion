@@ -8,11 +8,8 @@
         include './includes/conection.php'; 
     ?>
     <body>
-        <?php include './includes/header.php'; ?>
-        
-        
-        <?php 
-        if(empty($_SESSION)) {            
+        <?php include './includes/header.php'; 
+        if(empty($_SESSION)) { 
             echo '<div class="container">'
             . '<h1>Log In</h1>'
             . '<form method="POST" class="form-login">'
@@ -20,7 +17,7 @@
                     . '<tr> <td>Email</td> <td> <input type="email" name="email"> </td> </tr>'
                     . '<tr> <td>Clave</td> <td> <input type="password" name="password"> </td> </tr>'
                     . '<tr> <td><input type="submit"></td> <td align="right"> <a href="./includes/register.php">Registrarse</a> </td></tr>'
-                    .'</table></form></div>';
+                .'</table></form></div>';
             if (array_key_exists("email", $_POST) && array_key_exists("password", $_POST)){
                 if(strlen($_POST['email']) > 0 && strlen($_POST['password']) > 0) {
                     $afterLogIn = loginOperations($_POST['email'],'login', $_POST['password']);
@@ -108,7 +105,6 @@
         </div>
         
         <!-- Modal addComents -->
-        <?php var_dump($_POST); ?>
         <div class="modal fade" id="addComents" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
@@ -128,7 +124,7 @@
                           </tr> 
                         </thead> 
                        <tbody><tr>
-                          <td><select id="locations-options">
+                          <td><select name="locations-options">
 
                           <?php 
                               $allPlaces = getAllLocations();
@@ -137,8 +133,8 @@
                               } 
                           ?>
                           </select></td>
-                          <td> <input type="text" id="comment"> </td>
-                          <td> <select id="score-options">
+                          <td> <input type="text" name="comment" value="valor original"> </td>
+                          <td> <select name="score-options">
                               <option value="1">1</option>  
                               <option value="2">2</option>  
                               <option value="3">3</option>  
