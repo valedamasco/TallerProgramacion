@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include_once './head.php';
     include 'header.php';
     include './conection.php';
