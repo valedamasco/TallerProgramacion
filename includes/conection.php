@@ -86,7 +86,6 @@ function getAllLocations(){
     $password = 'root';
     $baseDeDatos = 'obligatorio';
     $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
-
     if(!db){
         echo '<label>Error al conectarse a la base</label>';
         var_dump($db);

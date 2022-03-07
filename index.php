@@ -75,7 +75,6 @@
         <!-- Modal seeComments -->
         <div class="modal fade" id="seeComments" role="dialog">
           <div class="modal-dialog">
-              <h1>ID boton:></h1>
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
@@ -96,6 +95,7 @@
                         foreach ($allComments as $comment) {
                             echo "<tr> <td>$comment[4]</td> <td>$comment[8]</td> <td>$comment[3]</td> <td>$comment[5]</td> </tr>";
                         }
+                        echo '</tbody>';
                       ?>
                   </table>
               </div>
@@ -108,31 +108,47 @@
         </div>
         
         <!-- Modal addComents -->
+        <?php var_dump($_POST); ?>
         <div class="modal fade" id="addComents" role="dialog">
           <div class="modal-dialog">
-              <h1>ID boton:></h1>
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Comentarios</h4>
+                <h4 class="modal-title">Agregar Comentario</h4>
               </div>
               <div class="modal-body">
-                  <table class="table">
-                      <thead class="thead-dark"> <tr>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Alias</th>
-                          <th scope="col">Texto</th>
-                          <th scope="col">Puntaje</th>
-                      </tr> </thead> 
-                      <?php 
-                        $allComments = getAllCommentsByPlace(1);
-                        echo '<tbody>';
-                        foreach ($allComments as $comment) {
-                            echo "<tr> <td>$comment[4]</td> <td>$comment[8]</td> <td>$comment[3]</td> <td>$comment[5]</td> </tr>";
-                        }
-                      ?>
-                  </table>
+                  <form method="POST" class="form-comment">
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                              <th scope="col">Lugar</th>
+                              <th scope="col">Comentario</th>
+                              <th scope="col">Puntaje</th>
+                          </tr> 
+                        </thead> 
+                       <tbody><tr>
+                          <td><select id="locations-options">
+
+                          <?php 
+                              $allPlaces = getAllLocations();
+                              foreach ($allPlaces as $place) {
+                                  echo "<option value='$place[0]'>$place[1]</option>";
+                              } 
+                          ?>
+                          </select></td>
+                          <td> <input type="text" id="comment"> </td>
+                          <td> <select id="score-options">
+                              <option value="1">1</option>  
+                              <option value="2">2</option>  
+                              <option value="3">3</option>  
+                              <option value="4">4</option> 
+                              <option value="5">5</option>     
+                          </select>  </td> 
+                        </tr></tbody>
+                    </table>
+                    <input type="submit">
+                  </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
