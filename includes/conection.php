@@ -1,4 +1,6 @@
 <?php
+
+
 function conectionDB(){
     $servidor = '127.0.0.1';
     $usuario = 'root';
@@ -38,6 +40,7 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                     $_SESSION['email'] = $emailLogin;
                     $fetchResult = mysqli_fetch_assoc($result);
                     $_SESSION['alias'] = $fetchResult['alias'];
+                    $_SESSION['isAdmin'] = $fetchResult['es_admin'];
                 } 
                 return $logIn;
                 break;
@@ -56,9 +59,9 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                 $result = mysqli_query($db, $consultaSql);
                 $registerUser = mysqli_num_rows($result);
                 if($registerUser>0){
-                    session_start();
                     $_SESSION['email'] = $emailLogin;
                     $_SESSION['alias'] = $aliasLogin;
+                    $_SESSION['isAdmin'] = $isAdmin;
                 } 
                 return $registerUser;
                 break;
@@ -69,15 +72,20 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
     
 }
 
+function logOut(){
+    var_dump('ENTRO AL LOG OUT');
+    session_start();
+    unset($_SESSION);
+}
+
 
 function getAllLocations(){
-    
+    session_start();
     $servidor = '127.0.0.1';
     $usuario = 'root';
     $password = 'root';
     $baseDeDatos = 'obligatorio';
     $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
-
     if(!db){
         echo '<label>Error al conectarse a la base</label>';
         var_dump($db);
@@ -93,5 +101,81 @@ function getAllLocations(){
             return $data;
         } 
         return [];
-    }    
+    }  
+    mysqli_close($db);
+}
+
+function postNewLocation($name, $department, $photo, $linkvideo, $description){
+    session_start();
+    $servidor = '127.0.0.1';
+    $usuario = 'root';
+    $password = 'root';
+    $baseDeDatos = 'obligatorio';
+    $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
+    if(!db){
+        echo '<label>Error al conectarse a la base</label>';
+        var_dump($db);
+    }else{
+        $consultaSql = "INSERT INTO lugares VALUES ('','$name',$department ,'$photo','$linkvideo', '$description' )";
+        $result = mysqli_query($db, $consultaSql);
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+}
+
+function getAllCommentsByPlace($placeId){
+    session_start();
+    $servidor = '127.0.0.1';
+    $usuario = 'root';
+    $password = 'root';
+    $baseDeDatos = 'obligatorio';
+    $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
+
+    if(!db){
+        echo '<label>Error al conectarse a la base</label>';
+        var_dump($db);
+    }else{
+        $consultaSql = "SELECT * FROM `comentarios` JOIN `usuarios` ON comentarios.id_usuario = usuarios.id WHERE `id_lugar`=$placeId";
+        $result = mysqli_query($db, $consultaSql);
+        $rows = mysqli_num_rows($result);
+        if($rows>0){
+            $data = array();
+            while($row = mysqli_fetch_row($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } 
+        return [];
+    }  
+    mysqli_close($db);
+}
+
+function getAllUsers(){
+    $servidor = '127.0.0.1';
+    $usuario = 'root';
+    $password = 'root';
+    $baseDeDatos = 'obligatorio';
+    $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
+
+    if(!db){
+        echo '<label>Error al conectarse a la base</label>';
+        var_dump($db);
+    }else{
+        $consultaSql = "SELECT * FROM `usuarios`";
+        $result = mysqli_query($db, $consultaSql);
+        $rows = mysqli_num_rows($result);
+        if($rows>0){
+            $data = array();
+            while($row = mysqli_fetch_row($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } 
+        return [];
+    }  
+    mysqli_close($db);
 }
