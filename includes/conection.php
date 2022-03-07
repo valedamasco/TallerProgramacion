@@ -42,7 +42,6 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                     $_SESSION['alias'] = $fetchResult['alias'];
                     $_SESSION['isAdmin'] = $fetchResult['es_admin'];
                 } 
-                var_dump($_SESSION);
                 return $logIn;
                 break;
             case 'check':
@@ -60,7 +59,6 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
                 $result = mysqli_query($db, $consultaSql);
                 $registerUser = mysqli_num_rows($result);
                 if($registerUser>0){
-                    session_start();
                     $_SESSION['email'] = $emailLogin;
                     $_SESSION['alias'] = $aliasLogin;
                     $_SESSION['isAdmin'] = $isAdmin;
@@ -74,15 +72,20 @@ function loginOperations($emailLogin, $mode, $passwordLogin = '', $aliasLogin = 
     
 }
 
+function logOut(){
+    var_dump('ENTRO AL LOG OUT');
+    session_start();
+    unset($_SESSION);
+}
+
 
 function getAllLocations(){
-    
+    session_start();
     $servidor = '127.0.0.1';
     $usuario = 'root';
     $password = 'root';
     $baseDeDatos = 'obligatorio';
     $db = mysqli_connect($servidor, $usuario, $password, $baseDeDatos);
-
     if(!db){
         echo '<label>Error al conectarse a la base</label>';
         var_dump($db);
@@ -103,7 +106,7 @@ function getAllLocations(){
 }
 
 function postNewLocation($name, $department, $photo, $linkvideo, $description){
-    
+    session_start();
     $servidor = '127.0.0.1';
     $usuario = 'root';
     $password = 'root';
@@ -125,7 +128,7 @@ function postNewLocation($name, $department, $photo, $linkvideo, $description){
 }
 
 function getAllCommentsByPlace($placeId){
-    
+    session_start();
     $servidor = '127.0.0.1';
     $usuario = 'root';
     $password = 'root';

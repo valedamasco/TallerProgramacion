@@ -9,10 +9,19 @@
     list-style: none;
 }
 
-.nav-bar ul li{
-    float: left;
+
+.left-nav-bar{
     line-height: 30px;
+    float: left;  
+}  
+.right-nav-bar{
+    line-height: 30px;
+    float: right;   
+    padding-left: 10px;
+    padding-right: 10px;
 }
+ 
+
 
 .nav-bar ul li a{
     display: block;
